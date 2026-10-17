@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8e173e">
+  <title>给丹宝 · A little gift for you</title>
+  <style>
+    :root {
+      --wine: #64152f;
+      --rose: #a82450;
+      --pink: #f7c9d5;
+      --cream: #fff8f1;
+      --gold: #e8bd70;
+      --ink: #512034;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; overflow-x: hidden;
+      color: var(--ink);
+      font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(255,255,255,.9), transparent 38%),
+        radial-gradient(ellipse at 90% 85%, rgba(232,189,112,.22), transparent 35%),
+        linear-gradient(145deg, #fff4ef 0%, #f8d9e1 48%, #f5c4d0 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 28px 16px 40px;
+    }
+    .petals { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .petal {
+      position: absolute; top: -30px; color: rgba(168,36,80,.35);
+      font-size: 18px; animation: fall linear infinite;
+    }
+    @keyframes fall { to { transform: translate3d(45px, 110vh, 0) rotate(360deg); } }
+    .page { width: min(100%, 720px); position: relative; z-index: 1; text-align: center; }
+    .eyebrow { letter-spacing: .24em; text-transform: uppercase; font: 11px/1.5 Arial, sans-serif; color: #9c4d65; }
+    h1 { margin: 12px 0 7px; font-size: clamp(32px, 7vw, 53px); font-weight: 500; color: var(--wine); }
+    .subtitle { margin: 0 auto 28px; max-width: 440px; line-height: 1.8; color: #895166; font-size: 15px; }
+    .scene { min-height: 310px; display: grid; place-items: center; perspective: 900px; }
+    .gift-button { border: 0; background: transparent; cursor: pointer; padding: 14px; color: inherit; -webkit-tap-highlight-color: transparent; }
+    .gift-button:focus-visible { outline: 3px solid var(--rose); outline-offset: 8px; border-radius: 20px; }
+    .gift { width: 210px; height: 190px; position: relative; transition: transform .7s cubic-bezier(.2,.8,.2,1); filter: drop-shadow(0 18px 18px rgba(100,21,47,.16)); }
+    .gift-body {
+      position: absolute; bottom: 0; left: 10px; width: 190px; height: 132px;
+      border-radius: 5px 5px 12px 12px;
+      background: linear-gradient(100deg, #8e173e, #b52e58 48%, #841632);
+      border: 1px solid rgba(100,21,47,.2);
+    }
+    .gift-body::before { content:""; position:absolute; top:0; bottom:0; left:77px; width:35px; background:linear-gradient(90deg,#e7b86c,#ffe2a4,#d69a46); }
+    .gift-lid {
+      position: absolute; z-index: 3; top: 35px; left: 0; width: 210px; height: 40px;
+      border-radius: 7px; background: linear-gradient(#c13b63,#971b43);
+      box-shadow: inset 0 3px 0 rgba(255,255,255,.13);
+      transform-origin: 15% 90%; transition: transform .9s cubic-bezier(.2,.8,.2,1), top .9s;
+    }
+    .ribbon-top { position:absolute; z-index:4; top: 36px; left: 86px; width:38px; height:39px; background:linear-gradient(90deg,#d99d49,#ffe2a4,#d69a46); }
+    .bow { position:absolute; z-index:5; top:7px; left:75px; width:60px; height:36px; }
+    .bow::before,.bow::after { content:""; position:absolute; top:1px; width:30px; height:24px; border:7px solid #e8bd70; border-radius:80% 15% 80% 15%; }
+    .bow::before { left:0; transform:rotate(24deg); }
+    .bow::after { right:0; transform:scaleX(-1) rotate(24deg); }
+    .bow-knot { position:absolute; left:24px; top:12px; width:14px; height:14px; border-radius:50%; background:#ffe2a4; z-index:6; }
+    .gift-button:hover .gift { transform: translateY(-5px) rotate(-1deg); }
+    .gift-button:active .gift { transform: scale(.97); }
+    .tap { font: 12px Arial,sans-serif; letter-spacing:.12em; color:#98526a; margin-top: 18px; }
+    .letter { display:none; animation: rise .9s ease both; }
+    .letter.visible { display:block; }
+    @keyframes rise { from { opacity:0; transform:translateY(20px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+    .photo-frame {
+      margin: 0 auto; padding: 10px; width: min(100%, 410px);
+      background: rgba(255,250,246,.92); border: 1px solid rgba(190,120,135,.42);
+      box-shadow: 0 20px 50px rgba(100,21,47,.16); transform: rotate(-1deg);
+    }
+    .photo-frame img { display:block; width:100%; max-height: 490px; aspect-ratio: 4/5; object-fit: cover; background:#f3d8de; }
+    .photo-caption { font: 11px Arial,sans-serif; letter-spacing:.18em; color:#a16a7a; padding: 12px 5px 4px; }
+    .message { margin: 27px auto 0; max-width: 520px; }
+    .chinese { font-size: clamp(23px, 5vw, 31px); color:var(--wine); margin:0 0 12px; }
+    .english { font-size: 15px; line-height:1.9; color:#794458; margin:0 auto; }
+    .signature { margin-top:18px; color:#a82450; font-size:18px; }
+    .music-button, .again-button {
+      margin: 22px 5px 0; padding: 12px 18px; border-radius: 999px;
+      border: 1px solid #c87991; background: rgba(255,255,255,.55); color:var(--wine);
+      cursor:pointer; font-size:13px; transition:background .2s, transform .2s;
+    }
+    .music-button:hover,.again-button:hover { background:#fff7f7; transform:translateY(-1px); }
+    .footer { margin-top: 30px; font: 10px Arial,sans-serif; letter-spacing:.16em; color:#a16a7a; }
+    .hidden { display:none !important; }
+    .sparkle { position:fixed; pointer-events:none; z-index:10; animation: sparkle 1.2s ease-out forwards; }
+    @keyframes sparkle { from { opacity:1; transform:translateY(0) scale(.5) rotate(0deg); } to { opacity:0; transform:translateY(-90px) scale(1.5) rotate(100deg); } }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+  <main class="page">
+    <div class="eyebrow">A little something, just for you</div>
+    <h1>给丹宝 ♡</h1>
+    <p class="subtitle" id="intro">我为你准备了一个小惊喜。<br>I've made a little surprise for you.</p>
+
+    <section class="scene" id="giftScene">
+      <button class="gift-button" id="openGift" aria-label="Open your gift">
+        <div class="gift" aria-hidden="true">
+          <div class="gift-body"></div>
+          <div class="gift-lid" id="lid"></div>
+          <div class="ribbon-top"></div><div class="bow"></div><div class="bow-knot"></div>
+        </div>
+        <div class="tap">✧ TAP TO OPEN YOUR GIFT ✧</div>
+      </button>
+    </section>
+
+    <section class="letter" id="letter" aria-live="polite">
+      <div class="photo-frame">
+        <img src="photo.jpg" alt="Our special photo" id="photo">
+        <div class="photo-caption">A MOMENT I WANT TO KEEP FOREVER</div>
+      </div>
+      <div class="message">
+        <p class="chinese">丹宝，我真的好爱你。❤️</p>
+        <p class="english" id="customMessage">No matter how far apart we are, you always have a special place in my heart. This little gift is just to remind you how much you mean to me.</p>
+        <div class="signature">永远爱你 · Always yours</div>
+      </div>
+      <button class="music-button" id="musicToggle">♫ Play our song</button>
+      <button class="again-button" id="again">Open the gift again</button>
+    </section>
+    <audio id="song" src="music.mp3" preload="none" loop></audio>
+    <div class="footer">MADE WITH LOVE · 只属于你</div>
+  </main>
+
+  <script>
+    const openGift = document.getElementById('openGift');
+    const giftScene = document.getElementById('giftScene');
+    const letter = document.getElementById('letter');
+    const lid = document.getElementById('lid');
+    const song = document.getElementById('song');
+    const musicToggle = document.getElementById('musicToggle');
+    const petals = document.getElementById('petals');
+    let opened = false;
+
+    // Floating decorative hearts/petals
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('span');
+      p.className = 'petal';
+      p.textContent = ['♡', '✿', '♥', '❀'][i % 4];
+      p.style.left = (Math.random() * 100) + '%';
+      p.style.animationDuration = (9 + Math.random() * 13) + 's';
+      p.style.animationDelay = (-Math.random() * 18) + 's';
+      p.style.fontSize = (12 + Math.random() * 15) + 'px';
+      petals.appendChild(p);
+    }
+
+    function sparkleBurst() {
+      const symbols = ['♡', '✧', '♥', '✿'];
+      for (let i = 0; i < 20; i++) {
+        const s = document.createElement('span');
+        s.className = 'sparkle';
+        s.textContent = symbols[i % symbols.length];
+        s.style.left = (15 + Math.random() * 70) + 'vw';
+        s.style.top = (30 + Math.random() * 40) + 'vh';
+        s.style.color = i % 2 ? '#a82450' : '#c79742';
+        s.style.fontSize = (12 + Math.random() * 18) + 'px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1300);
+      }
+    }
+
+    openGift.addEventListener('click', () => {
+      if (opened) return;
+      opened = true;
+      lid.style.transform = 'translate(-16px,-58px) rotate(-22deg)';
+      lid.style.top = '8px';
+      openGift.style.pointerEvents = 'none';
+      setTimeout(() => {
+        giftScene.classList.add('hidden');
+        letter.classList.add('visible');
+        sparkleBurst();
+        // Browsers require a user gesture for audio. Start after the tap if the file exists.
+        song.play().then(() => updateMusicButton()).catch(() => updateMusicButton());
+      }, 650);
+    });
+
+    function updateMusicButton() {
+      musicToggle.textContent = song.paused ? '♫ Play our song' : '♫ Pause our song';
+    }
+    musicToggle.addEventListener('click', async () => {
+      if (song.paused) {
+        try { await song.play(); } catch (e) {
+          alert('Add your music file named music.mp3 next to index.html, then try again.');
+        }
+      } else {
+        song.pause();
+      }
+      updateMusicButton();
+    });
+    song.addEventListener('play', updateMusicButton);
+    song.addEventListener('pause', updateMusicButton);
+
+    document.getElementById('again').addEventListener('click', () => {
+      song.pause();
+      song.currentTime = 0;
+      letter.classList.remove('visible');
+      giftScene.classList.remove('hidden');
+      lid.style.transform = '';
+      lid.style.top = '35px';
+      openGift.style.pointerEvents = '';
+      opened = false;
+      updateMusicButton();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Helpful fallback if photo.jpg hasn't been added yet.
+    document.getElementById('photo').addEventListener('error', function() {
+      this.removeAttribute('src');
+      this.alt = 'Add your photo file named photo.jpg beside index.html';
+      this.style.display = 'block';
+      this.style.padding = '40px 20px';
+      this.style.color = '#8e173e';
+      this.style.font = '15px Arial, sans-serif';
+      this.style.objectFit = 'contain';
+    });
+  </script>
+</body>
+</html>
