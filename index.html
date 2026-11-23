@@ -42,7 +42,7 @@
     .scene { min-height: 310px; display: grid; place-items: center; perspective: 900px; }
     .gift-button { border: 0; background: transparent; cursor: pointer; padding: 14px; color: inherit; -webkit-tap-highlight-color: transparent; }
     .gift-button:focus-visible { outline: 3px solid var(--rose); outline-offset: 8px; border-radius: 20px; }
-    .gift { width: 210px; height: 190px; position: relative; transition: transform .7s cubic-bezier(.2,.8,.2,1); filter: drop-shadow(0 18px 18px rgba(100,21,47,.16)); }
+    .gift { width: 210px; height: 190px; position: relative; margin: 0 auto; transition: transform .7s cubic-bezier(.2,.8,.2,1); filter: drop-shadow(0 18px 18px rgba(100,21,47,.16)); }
     .gift-body {
       position: absolute; bottom: 0; left: 10px; width: 190px; height: 132px;
       border-radius: 5px 5px 12px 12px;
@@ -121,7 +121,7 @@
         <div class="signature">永远爱你 · Forever yours</div>
       </div>
       <button class="music-button" id="musicToggle">♫ Play our song</button>
-      <button class="again-button" id="again">Re open the box of houses!!!</button>
+      <button class="again-button" id="again">Climb to the top again!!!</button>
     </section>
     <audio id="song" src="music.mp3" preload="none" loop></audio>
     <div class="footer">We do the best working together, 丹宝 · 只属于你</div>
